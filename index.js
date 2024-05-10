@@ -1,31 +1,7 @@
-function spiralOrder(matrix) {
-  if (matrix.length === 0) return [];
-  const result = [];
-  let top = 0;
-  let bottom = matrix.length - 1;
-  let left = 0;
-  let right = matrix[0].length - 1;
-  while (top <= bottom && left <= right) {
-    for (let i = left; i <= right; i++) {
-      result.push(matrix[top][i]);
-    }
-    top++;
-    for (let i = top; i <= bottom; i++) {
-      result.push(matrix[i][right]);
-    }
-    right--;
-    if (top <= bottom) {
-      for (let i = right; i >= left; i--) {
-        result.push(matrix[bottom][i]);
-      }
-      bottom--;
-    }
-    if (left <= right) {
-      for (let i = bottom; i >= top; i--) {
-        result.push(matrix[i][left]);
-      }
-      left++;
-    }
+function countBits(num) {
+  const result = new Array(num + 1).fill(0);
+  for (let i = 1; i <= num; i++) {
+    result[i] = result[i >> 1] + (i & 1);
   }
   return result;
 }
