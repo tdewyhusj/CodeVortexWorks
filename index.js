@@ -1,15 +1,17 @@
-function uniquePaths(m, n) {
-  const dp = Array.from(Array(m), () => Array(n).fill(0));
-  for (let i = 0; i < m; i++) {
-    dp[i][0] = 1;
-  }
-  for (let j = 0; j < n; j++) {
-    dp[0][j] = 1;
-  }
-  for (let i = 1; i < m; i++) {
-    for (let j = 1; j < n; j++) {
-      dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+function levelOrder(root) {
+  if (!root) return [];
+  const result = [];
+  const queue = [root];
+  while (queue.length) {
+    const levelSize = queue.length;
+    const currentLevel = [];
+    for (let i = 0; i < levelSize; i++) {
+      const node = queue.shift();
+      currentLevel.push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
     }
+    result.push(currentLevel);
   }
-  return dp[m - 1][n - 1];
+  return result;
 }
